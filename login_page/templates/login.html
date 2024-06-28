@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Авторизація {% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="../../static/registration_page/css/login.css">
+{% endblock %}
+
+{% block content %}
+<div><a href="/login/">AUTHORIZATION</a><br/></div>
+<div class = "login_form">
+    <form method = "post">
+        <div class = "login_text">Login or email</div>
+        <input class = "input_login" type="text" name="login" name = "email">
+        <div class = "login_text">Password</div>
+        <input class = "input_login" type="password" name="password">
+        <div></div>
+        <button id="showPopup" class = "button_login" type="submit">SEND</button>
+    </form>
+</div>
+<div id="popup" class="popup">
+    AUTHORIZED
+    <a href="/" class="home">HOME</a>
+</div>
+<script>
+    // Добавление обработчика события клика на элемент с id 'showPopup'
+    document.getElementById('showPopup').addEventListener('click', function(event) {
+        // Получаем элемент с id 'popup'
+        var popup = document.getElementById('popup');
+        // Устанавливаем стиль 'display' элемента 'popup' в 'block', чтобы показать его
+        popup.style.display = 'block';
+        // Предотвращаем стандартное действие по клику (например, переход по ссылке)
+        event.preventDefault();
+    });
+</script>
+{% endblock %}

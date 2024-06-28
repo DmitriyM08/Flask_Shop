@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="../../static/registration_page/css/static.css">
+{% endblock %}
+
+{% block content %}
+    {% if name %}
+        <a class = "aa3" href="/">HOME</a>
+        <a class = "aa4" href="/shop/">SHOP</a>
+        <a class = "aa5" href="/contacts/">CONTACTS</a>
+        <a class = "aa6" href="/cart/">CART</a>
+        <h1>HOME PAGE</h1>
+        {% if is_admin %}
+            <a href="/admin/" class="aa8">ADMIN</a>
+        {% endif %}
+        <a href="/" class="aa7">{{ name2 }}</a>
+
+        <button id="cookieButton" style="display: none;" class = "counter" type="submit"></button>
+        <p> <span id="cookieCount" style="display: none;">1</span></p>
+        <script>
+            // Функция для получения количества куки-файлов
+            function getCookieCount() {
+                // Получаем все куки-файлы и разделяем их по символу ';'
+                var cookies = document.cookie.split(';')
+                    // Фильтруем пустые строки (например, если куки разделены ';;')
+                    .filter(function(cookie) {
+                        return cookie.trim() !== ""; // Отфильтровываем пустые строки
+                    });
+                // Возвращаем количество куки-файлов
+                return cookies.length;
+            }
+            
+            // Функция для обновления отображения количества куки-файлов на странице
+            function updateCookieCount() {
+                // Получаем текущее количество куки-файлов
+                var cookieCount = getCookieCount();
+                // Находим элементы на странице для отображения количества и кнопки
+                var countSpan = document.getElementById('cookieCount'); // Элемент для отображения числа куки-файлов
+                var countButton = document.getElementById('cookieButton'); // Кнопка (предполагается, что есть кнопка для работы с куки)
+            
+                // Проверяем количество куки-файлов и обновляем отображение на странице
+                if (cookieCount >= 1 && cookieCount <= 10) {
+                    // Если количество куки-файлов от 1 до 10, показываем элементы
+                    if (countSpan) {
+                        countSpan.textContent = cookieCount; // Устанавливаем текст для отображения числа куки-файлов
+                        countSpan.style.display = 'inline'; // Показываем элемент с числом куки-файлов
+                        countButton.style.display = 'inline'; // Показываем кнопку для работы с куки
+                    }
+                } else {
+                    // Если количество куки-файлов не в диапазоне от 1 до 10, скрываем элементы
+                    if (countSpan) {
+                        countSpan.style.display = 'none'; // Скрываем элемент с числом куки-файлов
+                        countButton.style.display = 'none'; // Скрываем кнопку для работы с куки
+                    }
+                }
+            }
+
+
+            window.onload = updateCookieCount;
+        </script>
+    {% else %}
+        <a class = "aa" href="/registration/">REGISTRATION</a>
+        <a class = "aa2" href="/login/">AUTHORIZATION</a>
+        <h1>HOME PAGE</h1>
+    {% endif %}
+
+    
+{% endblock %}

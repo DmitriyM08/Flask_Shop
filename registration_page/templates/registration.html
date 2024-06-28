@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="../../static/registration_page/css/registration.css">
+{% endblock %}
+
+{% block content %}
+<div><a href="/registration/">REGISTRATION</a><br/></div>
+<div class = "login_form">
+    <form method="post">
+        <div class = "login_text">Login</div>
+        <input id = "login_input" class="input_login" type= "text" name= "login" onkeyup="checkPasswords()">
+        <div class = "login_text">Email</div>
+        <input id = "email_input" class="input_login" type="text" name= "email" onkeyup=" checkPasswords()">
+        <div class = "login_text">Password</div>
+        <input  id="pass1_input" class="input_login" type="text" name="password" onkeyup="checkPasswords()">
+        <div class = "login_text">Password confirmation</div>
+        <input  id="pass2_input" class="input_login" type="text" name="password_confirmation" onkeyup="checkPasswords()">
+        <div></div>
+        <button id="showPopup" class = "button_login" type="submit" onclick="login_button">SEND</button>
+    </form>
+</div>
+<div id="popup" class="popup">
+    CONFIRMED
+    <a href="/login/" class="AUTHORIZATION">AUTHORIZATION</a>
+</div>
+<script>
+    // Получаем ссылку на элемент кнопки с id 'showPopup'
+    var login_button = document.getElementById('showPopup');
+    // Отключаем кнопку (делаем её неактивной)
+    login_button.disabled = true;
+    
+    // Добавляем обработчик события клика на кнопку
+    login_button.addEventListener('click', function(event) {
+        // Получаем ссылку на элемент всплывающего окна с id 'popup'
+        var popup = document.getElementById('popup');
+        // Показываем всплывающее окно, устанавливая стиль 'display' в 'block'
+        popup.style.display = 'block';
+        // Предотвращаем стандартное действие по клику (например, переход по ссылке)
+        event.preventDefault();
+    });
+    
+    // Получаем ссылки на поля ввода
+    var login_input = document.getElementById('login_input');
+    var email_input = document.getElementById('email_input');
+    var pass1_input = document.getElementById('pass1_input');
+    var pass2_input = document.getElementById('pass2_input');
+    
+    // Функция для проверки паролей
+    var checkPasswords = function() {
+        debugger; // Отладочная точка останова в коде
+    
+        var err = false; // Флаг ошибки
+    
+        // Проверяем заполнение полей логина и email
+        if (login_input.value == "" || email_input.value == "") {
+            err = true;
+        }
+    
+        // Проверяем совпадение и заполнение полей паролей
+        if (pass1_input.value != pass2_input.value || pass1_input.value == undefined || pass2_input.value == undefined || pass1_input.value == "" || pass2_input.value == "") {
+            err = true;
+        }
+    
+        // Устанавливаем состояние кнопки в зависимости от наличия ошибок
+        login_button.disabled = err;
+    }
+</script>
+{% endblock %}
